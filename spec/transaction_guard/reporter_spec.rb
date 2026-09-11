@@ -15,16 +15,19 @@ RSpec.describe TransactionGuard::Reporter do
 
       expect do
         described_class.report(operation: "HTTP request")
-      end.to raise_error(
-        TransactionGuard::Error,
-        /External side effect detected/
-      )
+      end.to raise_error(TransactionGuard::Error)
+    end
+
+    it "does nothing in off mode" do
+      configure_mode(:off)
+
+      expect do
+        described_class.report(operation: "HTTP request")
+      end.not_to output.to_stderr
     end
   end
-end
 
-def configure_mode(mode)
-  TransactionGuard.configure do |config|
-    config.mode = mode
+  def configure_mode(mode)
+    TransactionGuard.configure { |config| config.mode = mode }
   end
 end

@@ -13,6 +13,8 @@ module TransactionGuard
         warn message
       when :raise
         raise TransactionGuard::Error, message
+      when :off
+        nil
       end
     end
 
