@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 require "active_record"
+require "net/http"
+
 require_relative "transaction_guard/configuration"
 require_relative "transaction_guard/version"
 require_relative "transaction_guard/transaction"
+require_relative "transaction_guard/detectors/http"
+require_relative "transaction_guard/reporter"
 
+# Detects external side effects performed inside ActiveRecord transactions.
 module TransactionGuard
   class Error < StandardError; end
 
@@ -18,3 +23,4 @@ module TransactionGuard
     end
   end
 end
+Net::HTTP.prepend(TransactionGuard::Detectors::HTTP)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe TransactionGuard::Transaction do
   describe ".open?" do
     context "outside a transaction" do

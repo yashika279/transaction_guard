@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module TransactionGuard
+  # Provides ActiveRecord transaction state detection.
   module Transaction
     module_function
 

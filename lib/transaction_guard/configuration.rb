@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module TransactionGuard
+  # Stores TransactionGuard configuration.
   class Configuration
     attr_accessor :mode
 

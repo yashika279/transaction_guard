@@ -9,7 +9,11 @@ Gem::Specification.new do |spec|
   spec.email = ["yashikavijay2799@gmail.com"]
 
   spec.summary = "Detect external side effects inside ActiveRecord transactions"
-  spec.description = "Detects external side effects such as HTTP requests, email delivery, and background job enqueuing performed inside ActiveRecord transactions, helping prevent inconsistent state when a database transaction rolls back."
+  spec.description = <<~DESCRIPTION
+    Detects external side effects such as HTTP requests, email delivery, and
+    background job enqueuing performed inside ActiveRecord transactions,
+    helping prevent inconsistent state when a database transaction rolls back.
+  DESCRIPTION
   spec.homepage = "https://github.com/yashika279/transaction_guard"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
