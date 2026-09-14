@@ -41,6 +41,16 @@ RSpec.describe "ActiveJob detection" do
       TestJob.perform_now
     end
   end
+
+  it "raises in raise mode inside a transaction" do
+    TransactionGuard.configure { |config| config.mode = :raise }
+
+    expect do
+      User.transaction do
+        TestJob.perform_later
+      end
+    end.to raise_error(TransactionGuard::Error)
+  end
 end
 
 RSpec.describe TransactionGuard::Detectors::Job do

@@ -12,13 +12,15 @@ end
 
 RSpec.describe TransactionGuard::Detectors::Mail do
   let(:delivery_class) do
-    Class.new(FakeMailDelivery) do
-      prepend TransactionGuard::Detectors::Mail
+    Class.new(FakeMailDelivery).tap do |klass|
+      klass.prepend(TransactionGuard::Detectors::Mail)
     end
   end
 
   it "reports deliver_now inside a transaction" do
-    expect_report
+    expect(TransactionGuard::Reporter)
+      .to receive(:report)
+      .with(operation: "Email delivery")
 
     User.transaction do
       expect(delivery_class.new.deliver_now).to eq(:delivered)
@@ -26,17 +28,13 @@ RSpec.describe TransactionGuard::Detectors::Mail do
   end
 
   it "reports deliver_later inside a transaction" do
-    expect_report
+    expect(TransactionGuard::Reporter)
+      .to receive(:report)
+      .with(operation: "Email delivery")
 
     User.transaction do
       expect(delivery_class.new.deliver_later).to eq(:queued)
     end
-  end
-
-  def expect_report
-    expect(TransactionGuard::Reporter)
-      .to receive(:report)
-      .with(operation: "Email delivery")
   end
 end
 
@@ -71,5 +69,23 @@ RSpec.describe "Mail and ActiveJob integration" do
     User.transaction do
       TestMailer.welcome.deliver_later
     end
+  end
+end
+
+RSpec.describe "Mail detector raise mode" do
+  let(:delivery_class) do
+    Class.new(FakeMailDelivery).tap do |klass|
+      klass.prepend(TransactionGuard::Detectors::Mail)
+    end
+  end
+
+  it "raises inside a transaction" do
+    TransactionGuard.configure { |config| config.mode = :raise }
+
+    expect do
+      User.transaction do
+        delivery_class.new.deliver_now
+      end
+    end.to raise_error(TransactionGuard::Error)
   end
 end

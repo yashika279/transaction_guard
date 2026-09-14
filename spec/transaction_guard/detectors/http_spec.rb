@@ -18,6 +18,16 @@ RSpec.shared_examples "HTTP detector" do |method, operation, *arguments|
       http.public_send(method, *arguments)
     end
   end
+
+  it "raises in raise mode inside a transaction" do
+    TransactionGuard.configure { |config| config.mode = :raise }
+
+    expect do
+      User.transaction do
+        Net::HTTP.get(URI("https://example.com"))
+      end
+    end.to raise_error(TransactionGuard::Error)
+  end
 end
 
 RSpec.describe TransactionGuard::Detectors::HTTP do
