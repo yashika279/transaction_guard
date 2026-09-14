@@ -33,6 +33,7 @@ module TransactionGuard
       private
 
       def report_http_request(operation)
+        return unless TransactionGuard.configuration.enabled?
         return unless TransactionGuard::Transaction.open?
 
         TransactionGuard::Reporter.report(operation: operation)

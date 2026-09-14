@@ -30,6 +30,18 @@ RSpec.shared_examples "HTTP detector" do |method, operation, *arguments|
   end
 end
 
+RSpec.shared_examples "HTTP detector off mode" do |method, *arguments|
+  it "does not report in off mode" do
+    TransactionGuard.configure { |config| config.mode = :off }
+
+    expect(TransactionGuard::Reporter).not_to receive(:report)
+
+    User.transaction do
+      http.send(method, *arguments)
+    end
+  end
+end
+
 RSpec.describe TransactionGuard::Detectors::HTTP do
   describe "#get" do
     include_examples "HTTP detector", :get, "HTTP GET", "/"

@@ -18,6 +18,7 @@ module TransactionGuard
 
       def report_job(operation)
         return if mail_delivery_in_progress?
+        return unless TransactionGuard.configuration.enabled?
         return unless TransactionGuard::Transaction.open?
 
         TransactionGuard::Reporter.report(operation: operation)

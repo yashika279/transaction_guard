@@ -89,3 +89,21 @@ RSpec.describe "Mail detector raise mode" do
     end.to raise_error(TransactionGuard::Error)
   end
 end
+
+RSpec.describe "Mail detector off mode" do
+  let(:delivery_class) do
+    Class.new(FakeMailDelivery).tap do |klass|
+      klass.prepend(TransactionGuard::Detectors::Mail)
+    end
+  end
+
+  it "does not report inside a transaction" do
+    TransactionGuard.configure { |config| config.mode = :off }
+
+    expect(TransactionGuard::Reporter).not_to receive(:report)
+
+    User.transaction do
+      delivery_class.new.deliver_now
+    end
+  end
+end

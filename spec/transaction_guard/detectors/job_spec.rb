@@ -70,3 +70,15 @@ RSpec.describe TransactionGuard::Detectors::Job do
     end
   end
 end
+
+RSpec.describe "ActiveJob off mode" do
+  it "does not report perform_later" do
+    TransactionGuard.configure { |config| config.mode = :off }
+
+    expect(TransactionGuard::Reporter).not_to receive(:report)
+
+    User.transaction do
+      TestJob.perform_later
+    end
+  end
+end

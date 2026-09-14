@@ -8,5 +8,9 @@ module TransactionGuard
     def initialize
       @mode = :warn
     end
+
+    def enabled?
+      mode != :off
+    end
   end
 end

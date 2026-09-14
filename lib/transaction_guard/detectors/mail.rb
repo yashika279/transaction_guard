@@ -19,6 +19,7 @@ module TransactionGuard
       private
 
       def report_email
+        return unless TransactionGuard.configuration.enabled?
         return unless TransactionGuard::Transaction.open?
 
         TransactionGuard::Reporter.report(operation: "Email delivery")
