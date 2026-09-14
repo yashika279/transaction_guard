@@ -17,5 +17,11 @@ RSpec.describe TransactionGuard do
 
       expect(described_class.configuration.mode).to eq(:raise)
     end
+
+    it "rejects an invalid mode" do
+      expect do
+        TransactionGuard::Configuration.new.mode = :invalid
+      end.to raise_error(ArgumentError, /Invalid mode/)
+    end
   end
 end
