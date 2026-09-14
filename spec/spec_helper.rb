@@ -2,11 +2,14 @@
 
 require "transaction_guard"
 require "active_record"
+require "action_mailer"
 
 ActiveRecord::Base.establish_connection(
   adapter: "sqlite3",
   database: ":memory:"
 )
+
+ActiveJob::Base.queue_adapter = :test
 
 ActiveRecord::Schema.define do
   create_table :users do |t|
@@ -15,6 +18,16 @@ ActiveRecord::Schema.define do
 end
 
 class User < ActiveRecord::Base
+end
+
+class TestMailer < ActionMailer::Base
+  def welcome
+    mail(
+      to: "test@example.com",
+      subject: "Welcome",
+      body: "Welcome to TransactionGuard"
+    )
+  end
 end
 
 RSpec.configure do |config|
@@ -26,5 +39,11 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.after do
+    TransactionGuard.configure do |transaction_guard|
+      transaction_guard.mode = :warn
+    end
   end
 end
