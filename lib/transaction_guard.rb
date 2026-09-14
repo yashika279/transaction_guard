@@ -29,5 +29,6 @@ module TransactionGuard
 end
 Net::HTTP.prepend(TransactionGuard::Detectors::HTTP)
 
-ActionMailer::MessageDelivery.prepend(TransactionGuard::Detectors::Mail)
-ActiveJob::Base.singleton_class.prepend(TransactionGuard::Detectors::Job)
+ActionMailer::MessageDelivery.prepend(TransactionGuard::Detectors::Mail) if defined?(ActionMailer::MessageDelivery)
+
+ActiveJob::Base.singleton_class.prepend(TransactionGuard::Detectors::Job) if defined?(ActiveJob::Base)
