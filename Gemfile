@@ -11,3 +11,8 @@ gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
+
+# Optional integrations exercised by the test suite
+gem "actionmailer"
+gem "activejob"
+gem "sqlite3"

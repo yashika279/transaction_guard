@@ -219,6 +219,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer
+  activejob
   irb
   rake (~> 13.0)
   rspec (~> 3.0)

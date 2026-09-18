@@ -52,9 +52,15 @@ TransactionGuard supports three modes:
 
 The default mode is `:warn`.
 
-Configure TransactionGuard in an initializer:
+In Rails applications, the included Railtie sets:
+
+* `:warn` in development and test
+* `:off` in production
+
+Override this in an initializer:
 
 ```ruby
+# config/initializers/transaction_guard.rb
 TransactionGuard.configure do |config|
   config.mode = :warn
 end
@@ -70,17 +76,7 @@ TransactionGuard.configure do |config|
 end
 ```
 
-When an external side effect is detected inside a transaction, TransactionGuard reports a warning.
-
-Example:
-
-```ruby
-User.transaction do
-  Net::HTTP.get(URI("https://example.com"))
-end
-```
-
-The warning explains the risk and suggests safer alternatives.
+When an external side effect is detected inside a transaction, TransactionGuard reports a warning including the operation and caller location.
 
 ### Raise mode
 
@@ -136,6 +132,8 @@ head
 options
 ```
 
+Clients that build on `Net::HTTP` (for example some Faraday adapters) may also be detected. Direct Faraday, HTTParty, httpx, and similar clients are not hooked in 0.1.0.
+
 ## Email detection
 
 TransactionGuard detects email delivery performed inside an ActiveRecord transaction.
@@ -185,6 +183,8 @@ end
 ```
 
 This is reported as job execution.
+
+Sidekiq, Resque, and other non-ActiveJob APIs are not detected in 0.1.0.
 
 ## Why does this matter?
 
@@ -263,7 +263,12 @@ bundle exec gem build transaction_guard.gemspec
 
 Bug reports, feature requests, and pull requests are welcome.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and checklist details.
 Please make sure tests and RuboCop pass before submitting a pull request.
+
+## Security
+
+See [SECURITY.md](SECURITY.md) for how to report vulnerabilities.
 
 ## License
 

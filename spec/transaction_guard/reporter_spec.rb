@@ -18,6 +18,14 @@ RSpec.describe TransactionGuard::Reporter do
       end.to raise_error(TransactionGuard::Error)
     end
 
+    it "includes caller location in the message" do
+      configure_mode(:warn)
+
+      expect do
+        described_class.report(operation: "HTTP request")
+      end.to output(/Location:/).to_stderr
+    end
+
     it "does nothing in off mode" do
       configure_mode(:off)
 

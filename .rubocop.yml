@@ -1,5 +1,12 @@
 AllCops:
   TargetRubyVersion: 3.1
+  NewCops: enable
+  SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+    - "*.gemspec"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
