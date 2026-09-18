@@ -2,8 +2,18 @@
 
 require "active_record"
 require "net/http"
-require "action_mailer"
-require "active_job"
+
+begin
+  require "action_mailer"
+rescue LoadError
+  # ActionMailer is optional.
+end
+
+begin
+  require "active_job"
+rescue LoadError
+  # ActiveJob is optional.
+end
 
 require_relative "transaction_guard/configuration"
 require_relative "transaction_guard/version"

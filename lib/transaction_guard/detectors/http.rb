@@ -44,10 +44,12 @@ module TransactionGuard
       end
 
       def with_http_request
+        previous_state = Thread.current[:transaction_guard_http_request]
         Thread.current[:transaction_guard_http_request] = true
+
         yield
       ensure
-        Thread.current[:transaction_guard_http_request] = false
+        Thread.current[:transaction_guard_http_request] = previous_state
       end
     end
   end

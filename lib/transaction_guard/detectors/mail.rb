@@ -30,10 +30,12 @@ module TransactionGuard
       end
 
       def with_mail_delivery
+        previous_state = Thread.current[:transaction_guard_mail_delivery]
         Thread.current[:transaction_guard_mail_delivery] = true
+
         yield
       ensure
-        Thread.current[:transaction_guard_mail_delivery] = false
+        Thread.current[:transaction_guard_mail_delivery] = previous_state
       end
     end
   end
