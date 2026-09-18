@@ -4,8 +4,10 @@
 require "bundler/setup"
 require "transaction_guard"
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
+begin
+  require "irb"
+rescue LoadError
+  abort "Install irb to use the console: gem install irb"
+end
 
-require "irb"
 IRB.start(__FILE__)
