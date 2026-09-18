@@ -18,11 +18,13 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
-  # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/yashika279/transaction_guard"
-  spec.metadata["changelog_uri"] = "https://github.com/yashika279/transaction_guard/blob/main/CHANGELOG.md"
+  spec.metadata["changelog_uri"] = "https://github.com/yashika279/transaction_guard/blob/master/CHANGELOG.md"
+  spec.metadata["bug_tracker_uri"] = "https://github.com/yashika279/transaction_guard/issues"
+  spec.metadata["rubygems_mfa_required"] = "true"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -39,8 +41,6 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "activerecord", ">= 7.0"
-  spec.add_development_dependency "actionmailer"
-  spec.add_development_dependency "sqlite3"
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 end

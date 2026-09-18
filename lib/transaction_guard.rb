@@ -37,8 +37,11 @@ module TransactionGuard
     end
   end
 end
+
 Net::HTTP.prepend(TransactionGuard::Detectors::HTTP)
 
 ActionMailer::MessageDelivery.prepend(TransactionGuard::Detectors::Mail) if defined?(ActionMailer::MessageDelivery)
 
 ActiveJob::Base.singleton_class.prepend(TransactionGuard::Detectors::Job) if defined?(ActiveJob::Base)
+
+require_relative "transaction_guard/railtie" if defined?(Rails::Railtie)
