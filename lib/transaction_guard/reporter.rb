@@ -36,7 +36,8 @@ module TransactionGuard
     def caller_location
       caller_locations(1, 40)&.find do |frame|
         path = frame.absolute_path || frame.path
-        path && !path.include?("/transaction_guard/")
+        # Skip gem internals only — not the project path (e.g. .../transaction_guard/spec/...)
+        path && !path.include?("/lib/transaction_guard/")
       end&.to_s
     end
     private_class_method :caller_location
