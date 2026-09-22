@@ -8,13 +8,14 @@ Gem::Specification.new do |spec|
   spec.authors = ["Yashika"]
   spec.email = ["yashikavijay2799@gmail.com"]
 
-  spec.summary = "Detect external side effects inside ActiveRecord transactions"
+  spec.summary = "Rails/ActiveRecord gem that detects HTTP, email, and job side effects inside DB transactions"
   spec.description = <<~DESCRIPTION
-    Detects external side effects such as HTTP requests, email delivery, and
-    background job enqueuing performed inside ActiveRecord transactions,
-    helping prevent inconsistent state when a database transaction rolls back.
+    TransactionGuard is a Ruby gem for Rails and ActiveRecord apps. It detects
+    external side effects such as Net::HTTP requests, ActionMailer delivery, and
+    ActiveJob enqueueing performed inside database transactions, helping you
+    avoid inconsistent state when a transaction rolls back.
   DESCRIPTION
-  spec.homepage = "https://github.com/yashika279/transaction_guard"
+  spec.homepage = "https://yashika279.github.io/transaction_guard/"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
@@ -22,6 +23,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/yashika279/transaction_guard"
+  spec.metadata["documentation_uri"] = "https://github.com/yashika279/transaction_guard#readme"
   spec.metadata["changelog_uri"] = "https://github.com/yashika279/transaction_guard/blob/master/CHANGELOG.md"
   spec.metadata["bug_tracker_uri"] = "https://github.com/yashika279/transaction_guard/issues"
   spec.metadata["rubygems_mfa_required"] = "true"
