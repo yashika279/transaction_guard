@@ -1,0 +1,23 @@
+name: Feedback
+description: General feedback or questions about using TransactionGuard
+title: "[Feedback]: "
+labels: ["feedback"]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Your feedback
+      description: What worked well, what was confusing, or what you would change?
+    validations:
+      required: true
+  - type: dropdown
+    id: context
+    attributes:
+      label: How are you using TransactionGuard?
+      options:
+        - In a Rails app (development / test)
+        - Evaluating / reading docs
+        - Contributing / reviewing the code
+        - Other
+    validations:
+      required: false

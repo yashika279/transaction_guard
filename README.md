@@ -261,9 +261,12 @@ bundle exec gem build transaction_guard.gemspec
 
 ## Contributing
 
-Bug reports, feature requests, and pull requests are welcome.
+Bug reports, feature ideas, feedback, and pull requests are welcome.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and checklist details.
+- Open an [issue](https://github.com/yashika279/transaction_guard/issues/new/choose) for bugs, features, or feedback.
+- `master` is protected — **fork the repo**, push your branch, and open a PR against `master`.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, the fork workflow, and the PR checklist.
 Please make sure tests and RuboCop pass before submitting a pull request.
 
 ## Security

@@ -1,0 +1,63 @@
+name: Bug report
+description: Something is not working as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Fill in as much as you can.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Smallest code sample or steps that trigger the issue.
+      render: ruby
+    validations:
+      required: false
+  - type: input
+    id: ruby-version
+    attributes:
+      label: Ruby version
+      placeholder: "3.3.0"
+    validations:
+      required: true
+  - type: input
+    id: rails-version
+    attributes:
+      label: Rails / ActiveRecord version
+      placeholder: "7.2.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: TransactionGuard mode
+      options:
+        - warn
+        - raise
+        - off
+        - default / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Logs, stack traces, gem versions, or anything else that helps.
+    validations:
+      required: false
