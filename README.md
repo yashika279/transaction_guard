@@ -1,12 +1,8 @@
 # TransactionGuard
 
-TransactionGuard detects external side effects performed inside ActiveRecord transactions.
+**TransactionGuard** is a Rails / ActiveRecord Ruby gem that detects external side effects inside database transactions — including HTTP requests, email delivery, and background job enqueueing.
 
-Database transactions can roll back database changes, but they cannot automatically roll back operations such as:
-
-* HTTP requests
-* Email delivery
-* Background job enqueueing
+Database transactions can roll back database changes, but they cannot automatically roll back those external operations. TransactionGuard helps catch these mismatches during development and testing.
 
 For example:
 
@@ -19,8 +15,6 @@ end
 ```
 
 If the transaction later rolls back, the external API request cannot automatically be rolled back with it.
-
-TransactionGuard helps identify these situations during development and testing.
 
 ## Installation
 

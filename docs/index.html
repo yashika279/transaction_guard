@@ -9,9 +9,9 @@
     />
     <meta
       name="description"
-      content="TransactionGuard is a Rails/ActiveRecord gem that detects HTTP, email, and job side effects inside database transactions."
+      content="TransactionGuard is a Rails and ActiveRecord Ruby gem that detects HTTP, email, and background job side effects inside database transactions."
     />
-    <title>TransactionGuard — Rails gem for transaction side effects</title>
+    <title>TransactionGuard — Rails / ActiveRecord gem for transaction side effects</title>
     <style>
       :root {
         --bg: #f3f6f4;
@@ -19,6 +19,7 @@
         --muted: #3d5248;
         --accent: #0f6b4c;
         --line: #c5d4cc;
+        --code-bg: #e7efea;
       }
 
       * {
@@ -46,6 +47,12 @@
         font-size: clamp(2rem, 5vw, 2.75rem);
         letter-spacing: -0.03em;
         line-height: 1.1;
+      }
+
+      h2 {
+        margin: 2.25rem 0 0.75rem;
+        font-size: 1.15rem;
+        letter-spacing: -0.01em;
       }
 
       p {
@@ -81,7 +88,18 @@
         color: #fff;
       }
 
+      pre {
+        margin: 0;
+        padding: 1rem 1.1rem;
+        overflow-x: auto;
+        background: var(--code-bg);
+        border: 1px solid var(--line);
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
       code {
+        font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
         font-size: 0.95em;
       }
     </style>
@@ -90,13 +108,16 @@
     <main>
       <h1>TransactionGuard</h1>
       <p>
-        A Rails / ActiveRecord gem that detects external side effects — HTTP
-        requests, email delivery, and background jobs — performed inside
+        A Rails / ActiveRecord Ruby gem that detects external side effects —
+        HTTP requests, email delivery, and background jobs — performed inside
         database transactions.
       </p>
-      <p>
-        Install with <code>gem "transaction_guard"</code>.
-      </p>
+
+      <h2>Installation</h2>
+      <p>Add the gem to your Rails app Gemfile:</p>
+      <pre><code>gem "transaction_guard"</code></pre>
+      <p>Then run <code>bundle install</code>. In development and test, warnings are on by default.</p>
+
       <div class="actions">
         <a class="primary" href="https://rubygems.org/gems/transaction_guard"
           >RubyGems</a
@@ -105,6 +126,10 @@
         <a
           href="https://github.com/yashika279/transaction_guard/blob/master/README.md"
           >Docs</a
+        >
+        <a
+          href="https://github.com/yashika279/transaction_guard/releases/tag/v0.1.0"
+          >v0.1.0</a
         >
       </div>
     </main>
