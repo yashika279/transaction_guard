@@ -202,7 +202,7 @@ Similar problems can occur with HTTP requests and email delivery.
 
 ## Recommended alternatives
 
-When an external side effect depends on a successful database transaction, consider moving the operation until after the transaction commits.
+When an external side effect depends on a successful database transaction, move the operation until after the transaction commits.
 
 For example:
 
@@ -216,14 +216,20 @@ end
 WelcomeJob.perform_later(user.id)
 ```
 
-For more complex workflows, consider patterns such as:
+You can also use `after_commit` (or enqueue ActiveJob only after a successful commit). That fixes the **ordering** problem: the side effect no longer runs if the transaction rolls back.
 
-* `after_commit`
+`after_commit` alone is not fully crash-safe. If the process dies after the commit succeeds but before the callback runs, the email or job may never go out, with no automatic retry. When delivery must be guaranteed, prefer a **transactional outbox** (record the intent in the same DB transaction) plus a worker or reconciliation job that sends from the outbox, or another reliable event-publishing approach.
+
+Patterns to consider:
+
+* Run the side effect after the transaction (as in the example above)
+* `after_commit` — good for ordering; not durable across process failure by itself
 * ActiveJob triggered after a successful commit
-* transactional outbox
-* reliable event publishing
+* Transactional outbox + worker / reconciliation
+* Reliable event publishing
 
 TransactionGuard does not automatically move, delay, retry, or otherwise modify external operations. It reports the potentially unsafe operation so the application can decide how to handle it.
+
 
 ## Development
 

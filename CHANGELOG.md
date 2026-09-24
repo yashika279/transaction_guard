@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Clarify in the README that `after_commit` fixes rollback ordering but is not crash-safe alone; prefer an outbox when delivery must be guaranteed
+
 ## [0.1.0] - 2026-09-18
 
 First public release of **TransactionGuard**, a Rails / ActiveRecord gem for detecting side effects inside database transactions.
