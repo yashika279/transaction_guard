@@ -276,3 +276,37 @@ See [SECURITY.md](SECURITY.md) for how to report vulnerabilities.
 ## License
 
 TransactionGuard is available as open source under the MIT License.
+
+
+## Real Rails Application
+
+Want to see TransactionGuard working in a real Rails application? Check out the example application:
+
+**[transaction_guard_test](https://github.com/yashika279/transaction_guard_test)**
+
+This repository contains a Rails application created to integrate and test TransactionGuard in a practical environment. Use it to explore how the gem detects external side effects during ActiveRecord transactions.
+
+### What you can explore
+
+* **HTTP requests** — detect `Net::HTTP` requests made inside an open transaction.
+* **Email delivery** — detect `deliver_now` and `deliver_later` calls inside transactions.
+* **Background jobs** — detect ActiveJob enqueueing and immediate execution inside transactions.
+* **Detection modes** — experiment with `:warn`, `:raise`, and `:off` configurations.
+
+### Try it yourself
+
+Clone the test application:
+
+```bash
+git clone https://github.com/yashika279/transaction_guard_test.git
+cd transaction_guard_test
+```
+
+Follow the setup instructions in the repository's README to install dependencies, configure the database, and start the application.
+
+For the gem integration and working examples, see the test application's source code.
+
+**Related repositories:**
+
+* [TransactionGuard gem](https://github.com/yashika279/transaction_guard)
+* [TransactionGuard test application](https://github.com/yashika279/transaction_guard_test)
